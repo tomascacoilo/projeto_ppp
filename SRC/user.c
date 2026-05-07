@@ -13,8 +13,6 @@ typedef struct {
 }person;
 
 
-
-
 int valida_pessoa(person* pessoa){
     if(pessoa->nasc.ano >= pessoa->ano){  //valida se a pessoa está na universidade antes de nascer
         return 0;
@@ -33,4 +31,36 @@ int valida_pessoa(person* pessoa){
     }
 
     return 1;  
+}
+
+
+
+
+typedef struct noLista{  //criar o no
+    person pessoaLista;
+    struct noLista* prox;
+}noLista;
+
+typedef noLista* pLista;
+
+//criar a lista
+
+pLista cria(){
+    pLista aux;   //vai ser um ponteiro para um nó´
+    person p1={"",{0,0,0},0,0,0,0.0}; //header
+    aux=(pLista)malloc(sizeof(noLista));
+    if(aux!= NULL){
+        aux->pessoaLista=p1;
+        aux->prox=NULL;
+    }
+
+    return aux;
+}
+
+// ver se a lista está vazia
+//...
+
+//eliminar um elemento 
+pLista elimina(){
+    pLista temp_ptr;
 }
