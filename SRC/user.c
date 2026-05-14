@@ -10,6 +10,7 @@ typedef struct {
     int ano;
     int numero;
     float saldo;
+    //acrescentar lista despesas
 }person;
 
 
@@ -71,8 +72,10 @@ void insere(pLista lista, person p1){
     no=(pLista)malloc(sizeof(noLista));
     if(no!=NULL){
         no->pessoaLista=p1;
-        procura(lista,p1.numero,)
-    }
+        procura(lista,p1.numero,&ant,&inutil);
+        no->prox=ant->prox;
+        ant->prox=no;
+    } 
 }
 
 
@@ -113,4 +116,13 @@ pLista elimina(pLista lista, int chave){
         ant->prox=atual->prox;
         free(atual);
     }
+}
+
+//nao sei se é para criar todas as funcoes possiveis para uma lista (maybe?)
+
+
+//funcao para carregar, já tendo em conta que no controlo vamos pedir ao utilizador esse valor 
+
+void carrega(float valor,pLista ){
+
 }
