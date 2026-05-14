@@ -66,5 +66,4 @@ void efetuar_despesa(node_trans* lista, int valor, char* info, data dt){
 }
 
 
-
 // NOTA: CADA ALUNO DEVERÁ TER UMA LISTA PROPRIA COM AS SUAS DESPESAS
