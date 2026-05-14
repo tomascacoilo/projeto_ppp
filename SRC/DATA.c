@@ -26,3 +26,11 @@ int valida_data(data* d){
 
     return 1;
 }
+
+int data_maior(data d1, data d2) {
+    if (d1.ano > d2.ano) return 1;
+    if (d1.ano < d2.ano) return 0;
+    if (d1.mes > d2.mes) return 1;
+    if (d1.mes < d2.mes) return 0;
+    return d1.dia > d2.dia;
+}

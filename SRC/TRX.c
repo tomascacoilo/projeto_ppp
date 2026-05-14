@@ -61,8 +61,16 @@ void efetuar_despesa(node_trans* lista, int valor, char* info, data dt){
     strcpy(novo->trx.info, info);
     novo->trx.date = dt;
 
-    novo->next = lista->next;
-    lista->next=novo;
+    node_trans* atual = lista; // = ao header
+
+    
+    while (atual->next != NULL && data_maior(dt, atual->next->trx.date)) {
+        atual = atual->next; //avança de um em um
+    }
+
+    
+    novo->next = atual->next;
+    atual->next = novo;
 }
 
 

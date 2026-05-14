@@ -8,5 +8,6 @@ typedef struct data_estrutura{
 } data;
 
 int valida_data(data* d);
+int data_maior(data d1, data d2);
 
 #endif
