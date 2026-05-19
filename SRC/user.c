@@ -67,6 +67,19 @@ int vazia(pLista lista){
     return 0;
 }
 
+//procurar um elemento
+void procura(pLista lista, int chave,pLista *ant,pLista *atual){ //procuramos pelo numero do estudante, ou seja, chave é um número
+    *ant=lista;  //aponta para um no
+    *atual=lista->prox;  //e este aponta para o próximo 
+    while((*atual)!=NULL && (*atual)->pessoaLista.numero< chave){
+        *ant=*atual;
+        *atual=(*atual)->prox;
+    }
+    if((*atual)!=NULL && (*atual)->pessoaLista.numero !=chave){
+        *atual=NULL; //se não encontrarmos o elemento 
+    }
+}
+
 //inserir um novo aluno
 void insere(pLista lista, person p1){
     pLista no,ant,inutil;
@@ -88,6 +101,7 @@ pLista destroi(pLista lista){
     while (!vazia(lista)){
         temp_str=lista;
         lista=lista->prox;
+        free(temp_str->pessoaLista.nome);
         free(temp_str);
     }
     free(lista);
@@ -95,18 +109,7 @@ pLista destroi(pLista lista){
 }
 
 
-//procurar um elemento
-void procura(pLista lista, int chave,pLista *ant,pLista *atual){ //procuramos pelo numero do estudante, ou seja, chave é um número
-    *ant=lista;  //aponta para um no
-    *atual=lista->prox;  //e este aponta para o próximo 
-    while((*atual)!=NULL && (*atual)->pessoaLista.numero< chave){
-        *ant=*atual;
-        *atual=(*atual)->prox;
-    }
-    if((*atual)!=NULL && (*atual)->pessoaLista.numero !=chave){
-        *atual=NULL; //se não encontrarmos o elemento 
-    }
-}
+
 
 
 //eliminar um elemento 
@@ -115,6 +118,7 @@ pLista elimina(pLista lista, int chave){
     procura(lista,chave,&ant,&atual);
     if(atual != NULL){
         ant->prox=atual->prox;
+        free(atual->pessoaLista.nome);
         free(atual);
     }
 }
