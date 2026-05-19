@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "DATA.h"
+#include "TRX.h"
 
 
 typedef struct {
@@ -123,6 +124,13 @@ pLista elimina(pLista lista, int chave){
 
 //funcao para carregar, já tendo em conta que no controlo vamos pedir ao utilizador esse valor 
 
-void carrega(float valor,pLista ){
-
+void carrega(float valor,pLista lista,int chave){
+    pLista ant,atual;  //ponteiros para nos 
+    procura(lista,chave,&ant,&atual); //atual aponta para a pessoa que queremos 
+    if (atual != NULL){
+        atual->pessoaLista.saldo+=valor;
+    }
+    else {
+        printf("Erro: Chave %d não encontrada na lista.\n", chave);
+    }
 }
