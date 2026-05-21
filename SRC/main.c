@@ -24,10 +24,15 @@ void guardar_dados_separados(pLista lista, const char* f_alunos, const char* f_d
         
         // Se o aluno tiver despesas, guarda-as no ficheiro de despesas
         if (p.despesas != NULL) {
-            node_trans* atual_d = p.despesas->; // Salta o nó sentinela da despesa
+            node_trans* atual_d = p.despesas->next; // Salta o nó sentinela da despesa
             while (atual_d != NULL) {
                 //Guardamos o NUMERO do estudante no inicio da linha da despesa para servir de ligação
-                fprintf(fd, "%d;%.2f;%s;%d;%d;%d\n", p.numero, atual_d->value, atual_d->description, atual_d->date.dia, atual_d->date.mes, atual_d->date.ano);
+                fprintf(fd, "%d;%.2f;%s;%d;%d;%d\n", p.numero, 
+                        atual_d->trx.valor, 
+                        atual_d->trx.info, 
+                        atual_d->trx.date.dia, 
+                        atual_d->trx.date.mes, 
+                        atual_d->trx.date.ano);
                 atual_d = atual_d->next;
             }
         }

@@ -11,7 +11,7 @@ typedef struct {
     int ano;
     int numero;
     float saldo;
-    //acrescentar lista despesas
+    node_trans* despesas;
 }person;
 
 
@@ -36,8 +36,6 @@ int valida_pessoa(person* pessoa){
 }
 
 
-
-
 typedef struct noLista{  //criar o no
     person pessoaLista;
     struct noLista* prox;
@@ -49,7 +47,7 @@ typedef noLista* pLista;
 
 pLista cria(){
     pLista aux;   //vai ser um ponteiro para um nó
-    person p1={"",{0,0,0},0,0,0,0.0}; //header
+    person p1={NULL,{0,0,0},0,0,0,0.0,NULL}; //header
     aux=(pLista)malloc(sizeof(noLista));
     if(aux!= NULL){
         aux->pessoaLista=p1;
@@ -87,8 +85,10 @@ void insere(pLista lista, person p1){
     if(no!=NULL){
         no->pessoaLista=p1;
         procura(lista,p1.numero,&ant,&inutil);
+        no->pessoaLista.despesas = create();
         no->prox=ant->prox;
         ant->prox=no;
+
     } 
 }
 
@@ -97,16 +97,23 @@ void insere(pLista lista, person p1){
 
 //destruir a lista
 pLista destroi(pLista lista){
-    pLista temp_str; //ponteiro temporário para um nó da lista
-    while (!vazia(lista)){
-        temp_str=lista->prox;
-        lista=temp_str->prox;
-        if (temp_str->pessoaLista.nome != NULL){
+    pLista temp_str;
+    
+    while (lista != NULL){
+        temp_str = lista; //ponteiro temporário para um nó da lista
+        lista=lista->prox;
+
+        if (temp_str->pessoaLista.despesas != NULL) {
+            clean(temp_str->pessoaLista.despesas);
+        }
+
+        if (temp_str->pessoaLista.nome != NULL) {
             free(temp_str->pessoaLista.nome);
-        }   
+        }
+
         free(temp_str);
     }
-    free(lista);
+
     return NULL;
 }
 
@@ -123,7 +130,6 @@ void elimina(pLista lista, int chave){
         free(atual->pessoaLista.nome);
         free(atual);
     }
-
 }
 
 //nao sei se é para criar todas as funcoes possiveis para uma lista (maybe?)
