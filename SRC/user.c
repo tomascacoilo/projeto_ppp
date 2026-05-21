@@ -99,9 +99,11 @@ void insere(pLista lista, person p1){
 pLista destroi(pLista lista){
     pLista temp_str; //ponteiro temporário para um nó da lista
     while (!vazia(lista)){
-        temp_str=lista;
-        lista=lista->prox;
-        free(temp_str->pessoaLista.nome);
+        temp_str=lista->prox;
+        lista=temp_str->prox;
+        if (temp_str->pessoaLista.nome != NULL){
+            free(temp_str->pessoaLista.nome);
+        }   
         free(temp_str);
     }
     free(lista);
@@ -113,7 +115,7 @@ pLista destroi(pLista lista){
 
 
 //eliminar um elemento 
-pLista elimina(pLista lista, int chave){
+void elimina(pLista lista, int chave){
     pLista ant,atual; //vao ser um ponteiro para um nó
     procura(lista,chave,&ant,&atual);
     if(atual != NULL){
@@ -121,6 +123,7 @@ pLista elimina(pLista lista, int chave){
         free(atual->pessoaLista.nome);
         free(atual);
     }
+
 }
 
 //nao sei se é para criar todas as funcoes possiveis para uma lista (maybe?)
