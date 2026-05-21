@@ -17,7 +17,6 @@ typedef struct noTrans {
 //____________________________LISTA_E_AS_SUAS_FUNÇÕES________________________________
 
 node_trans* create(){
-
     node_trans* aux;
     trans trx = {0, NULL, {0,0,0}};
     aux = (node_trans*) malloc(sizeof(node_trans));
