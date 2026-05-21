@@ -3,11 +3,10 @@
 #include "DATA.h"
 
 typedef struct {
-    int valor;
+    float valor;
     char* info;
     data date;
 } trans;
-
 typedef struct noTrans {
     trans trx;
     struct noTrans* next;
