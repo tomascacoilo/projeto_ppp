@@ -4,7 +4,7 @@
 #include "DATA.h"
 
 typedef struct {
-    int valor;
+    float valor;
     char* info;
     data date;
 } trans;
@@ -46,7 +46,7 @@ node_trans* clean(node_trans* list_trx) {
   return NULL;
 }
 
-void efetuar_despesa(node_trans* lista, int valor, char* info, data dt){
+void efetuar_despesa(node_trans* lista, float valor, char* info, data dt){
     if (lista==NULL) return;
 
     node_trans* novo = (node_trans*) malloc(sizeof(node_trans));
@@ -62,7 +62,6 @@ void efetuar_despesa(node_trans* lista, int valor, char* info, data dt){
 
     node_trans* atual = lista; // = ao header
 
-    
     while (atual->next != NULL && data_maior(dt, atual->next->trx.date)) {
         atual = atual->next; //avança de um em um
     }
@@ -72,5 +71,3 @@ void efetuar_despesa(node_trans* lista, int valor, char* info, data dt){
     atual->next = novo;
 }
 
-
-// NOTA: CADA ALUNO DEVERÁ TER UMA LISTA PROPRIA COM AS SUAS DESPESAS

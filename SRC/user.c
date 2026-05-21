@@ -85,14 +85,13 @@ void insere(pLista lista, person p1){
     if(no!=NULL){
         no->pessoaLista=p1;
         procura(lista,p1.numero,&ant,&inutil);
-        no->pessoaLista.despesas = create();
+        if (p1.despesas == NULL) {
+            no->pessoaLista.despesas = create();
+        }
         no->prox=ant->prox;
         ant->prox=no;
-
     } 
 }
-
-
 
 
 //destruir a lista
@@ -119,8 +118,6 @@ pLista destroi(pLista lista){
 
 
 
-
-
 //eliminar um elemento 
 void elimina(pLista lista, int chave){
     pLista ant,atual; //vao ser um ponteiro para um nó
@@ -132,10 +129,6 @@ void elimina(pLista lista, int chave){
     }
 }
 
-//nao sei se é para criar todas as funcoes possiveis para uma lista (maybe?)
-
-
-//funcao para carregar, já tendo em conta que no controlo vamos pedir ao utilizador esse valor 
 
 void carrega(float valor,pLista lista,int chave){
     pLista ant,atual;  //ponteiros para nos 
@@ -146,4 +139,25 @@ void carrega(float valor,pLista lista,int chave){
     else {
         printf("Erro: Chave %d não encontrada na lista.\n", chave);
     }
+}
+
+int valida_nome(char* nome) {
+    if (nome == NULL || strlen(nome) == 0) {
+        return 0; 
+    }
+
+    int estado = 0;
+
+    for (int i = 0; nome[i] != '\0'; i++) {
+        char c = nome[i];
+
+        if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) {
+            estado = 1;
+        } else if (c == ' ' || c == '\n' || c == '\t') {
+            continue; //ignora espaços
+        } else {
+            return 0;
+        }
+    }
+    return estado;
 }

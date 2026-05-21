@@ -43,42 +43,36 @@ void guardar_dados_separados(pLista lista, const char* f_alunos, const char* f_d
     fclose(fd);
 }
 
-void carregar_dados(pLista lista, const char* nome_ficheiro) {
+void carregar_dados(pLista lista, const char* f_alunos, const char* f_despesas) {
+    FILE* fp = fopen(f_alunos, "r");
 
-    FILE* fp = fopen(nome_ficheiro, "r");
     if (fp == NULL) {
         return;
     } else {
-        char linha[256];
+        char nome_tmp[100];
+        person p;
 
-        while(fgets(linha, sizeof(linha), fp)){
-            char nome_tmp[100];
-            person p;
+        while(fscanf(fp, "%[^;];%d;%d;%d;%d;%d;%d;%f\n", nome_tmp, &p.nasc.dia, &p.nasc.mes, &p.nasc.ano, &p.curso, &p.ano, &p.numero, &p.saldo) == 8){
 
-
-            fscanf(fp, "%[^;];%d;%d;%d;%d;%d;%d;%f", nome_tmp, &p.nasc, &p.curso, &p.ano, &p.numero, &p.saldo);
             p.nome = (char*) malloc(strlen(nome_tmp)+1);
-            p.despesas = NULL;
+            strcpy(p.nome, nome_tmp);
+            p.despesas = create();
 
             insere(lista, p);
         }
         fclose(fp);
     }
 
-    FILE* fd = fopen(nome_ficheiro, "r");
+    FILE* fd = fopen(f_despesas, "r");
     if (fd == NULL) {
         return;
     } else {
-        char linha[256];
+        char info_tmp[100];
+        int num_aluno;
+        float valor_d;
+        data d;
 
-        while(fgets(linha, sizeof(linha), fd)){
-            char info_tmp[100];
-            int num_aluno;
-            float saldo;
-            data d;
-
-
-            fscanf(fd, "%d;%f;%[^;];%d;%d;%d", &num_aluno, &saldo, &info_tmp, &d.dia, &d.mes, &d.ano);
+        while(fscanf(fd, "%d;%f;%[^;];%d;%d;%d\n", &num_aluno, &valor_d, info_tmp, &d.dia, &d.mes, &d.ano) == 6){
             
             pLista ant;
             pLista atual;
@@ -87,9 +81,9 @@ void carregar_dados(pLista lista, const char* nome_ficheiro) {
 
             //caso encontre o aluno, coloca a despesa na sua lista de despesas;
             if (atual != NULL && atual->pessoaLista.despesas != NULL) {
-                efetuar_despesa(atual->pessoaLista.despesas, saldo, info_tmp, d);
+                efetuar_despesa(atual->pessoaLista.despesas, valor_d, info_tmp, d);
             }
         }
-        fclose(fp);
+        fclose(fd);
     }
 }
