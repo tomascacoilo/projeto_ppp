@@ -28,7 +28,7 @@ int vazia(pLista lista);
 void insere(pLista lista, person p1);
 pLista destroi(pLista lista);
 void procura(pLista lista, int chave,pLista *ant,pLista *atual);
-pLista elimina(pLista lista, int chave);
+void elimina(pLista lista, int chave);
 void carrega(float valor,pLista lista,int chave);
 
 

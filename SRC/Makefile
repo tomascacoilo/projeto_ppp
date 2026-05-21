@@ -3,7 +3,7 @@ CFLAGS ?= -Wall -Wextra -Wpedantic -std=c99 -g
 
 SRC_DIR := .
 BIN_DIR := ../bin
-APP_BIN := $(BIN_DIR)/projectoppp_template
+APP_BIN := $(BIN_DIR)/projectoppp
 
 APP_SRCS := DATA.c TESTES.c TRX.c user.c
 APP_OBJS := $(patsubst %.c,$(BIN_DIR)/%.o,$(APP_SRCS))

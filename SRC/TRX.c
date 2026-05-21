@@ -35,7 +35,7 @@ int check_empty (node_trans* list_trx) {
 
 node_trans* clean(node_trans* list_trx) {
     while (list_trx != NULL) {
-        node_trans *temp_ptr = list_trx;
+        node_trans* temp_ptr = list_trx;
         list_trx = list_trx->next;
 
         if (temp_ptr->trx.info != NULL) { //liberta tbm a memoria da string trx.info
