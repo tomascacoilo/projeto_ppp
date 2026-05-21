@@ -142,9 +142,8 @@ void carrega(float valor,pLista lista,int chave){
     if (valor <0){
         return 0;
     }
-
-    procura(lista,chave,&ant,&atual); //atual aponta para a pessoa que queremos 
     
+    procura(lista,chave,&ant,&atual); //atual aponta para a pessoa que queremos 
     if (atual != NULL){
         atual->pessoaLista.saldo+=valor;
     }
