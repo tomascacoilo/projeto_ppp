@@ -10,7 +10,7 @@ typedef struct {
     int ano;
     int numero;
     float saldo;
-    //acrescentar lista despesas
+    trans* despesas;
 }person;
 
 
