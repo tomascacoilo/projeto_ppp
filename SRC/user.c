@@ -165,3 +165,4 @@ int valida_nome(char* nome) {
     }
     return estado;
 }
+
